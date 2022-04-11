@@ -2,6 +2,8 @@ grumphp:
     tasks:
         jsonlint: ~
         git_blacklist:
+            whitelist_patterns:
+                - /^src\/(.*)/
             keywords:
                 - "die("
                 - "var_dump("
@@ -9,7 +11,6 @@ grumphp:
                 - "dump("
                 - "exit;"
                 - "Twig_"
-                - "dd("
         phpcsfixer2:
             allow_risky: false
             using_cache: true

@@ -18,6 +18,30 @@ class MakeBundleGenerator
         $this->kernel = $kernel;
     }
 
+    public function addBundle($params)
+    {
+        $bundlesArray = include $this->projectDir.'\config\bundles.php';
+        $bundlesArray[$params['bundleNameSpace'].'\\'.$params['bundleClassName']] = ['all' => true];
+        $content = $this->buildContents($bundlesArray);
+        file_put_contents($this->projectDir.'\config\bundles.php', $content);
+    }
+
+    private function buildContents(array $bundles): string
+    {
+        $contents = "<?php\n\nreturn [\n";
+        foreach ($bundles as $class => $envs) {
+            $contents .= "    $class::class => [";
+            foreach ($envs as $env => $value) {
+                $booleanValue = var_export($value, true);
+                $contents .= "'$env' => $booleanValue, ";
+            }
+            $contents = substr($contents, 0, -2)."],\n";
+        }
+        $contents .= "];\n";
+
+        return $contents;
+    }
+
     public function generateNameSpace(string $vendor, string $bundleName)
     {
         return $vendor.'\\'.$bundleName;

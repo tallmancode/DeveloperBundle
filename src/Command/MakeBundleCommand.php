@@ -45,6 +45,8 @@ class MakeBundleCommand extends Command
             $this->generator->generateServiceClass($params);
         }
         $this->generator->generateServices($params);
+
+        $this->generator->addBundle($params);
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
         return Command::SUCCESS;

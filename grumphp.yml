@@ -1,0 +1,20 @@
+grumphp:
+    tasks:
+        jsonlint: ~
+        git_blacklist:
+            keywords:
+                - "die("
+                - "var_dump("
+                - "print_r("
+                - "dump("
+                - "exit;"
+                - "Twig_"
+                - "dd("
+        phpcsfixer2:
+            allow_risky: false
+            using_cache: true
+            verbose: true
+            config: .php-cs-fixer.php
+        xmllint: ~
+        yamllint:
+            parse_custom_tags: true

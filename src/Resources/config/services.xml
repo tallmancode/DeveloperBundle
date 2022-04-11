@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="tallmancode_developer.commands.make_bundle" class="TallmanCode\DeveloperBundle\Command\MakeBundleCommand">
+            <tag name="console.command"/>
+            <argument type="service" id="tallmancode_developer.generator.make_bundle_generator" />
+        </service>
+        <service id="TallmanCode\DeveloperBundle\Command\MakeBundleCommand" alias="tallmancode_developer.commands.make_bundle" />
+
+
+        <service id="tallmancode_developer.generator.make_bundle_generator" class="TallmanCode\DeveloperBundle\Generator\MakeBundleGenerator">
+            <argument type="service" id="filesystem" />
+            <argument type="service" id="kernel" />
+        </service>
+        <service id="TallmanCode\DeveloperBundle\Generator\MakeBundleGenerator" alias="tallmancode_developer.generator.make_bundle_generator" />
+
+    </services>
+</container>
